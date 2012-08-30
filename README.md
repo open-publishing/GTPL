@@ -4,7 +4,7 @@ A highlevel javascript template engine
 
 ## Basics
 
-** JSON **
+**JSON**
 
 ```js
 var json = {
@@ -14,37 +14,29 @@ var json = {
  "friends":["Jamie","Ryan","Gordon"]
 };
 ```
-** Template **
+**Template**
 
- ```html
+ ```
 {namespace Example}
 
 {template .Hello}
-  <html>
-    <head></head>
-    <body>
+    <h3>Hello {_.first_name} {_.last_name}</h3>
+  
+    {if _.age < 12}
+        <p>Grow up!</p>
+    {/if}
 
-      <h3>Hello {_.first_name} {_.last_name}</h3>
-
-      {if _.age < 12}
-       <p>Grow up!</p>
-      {/if}
-
-      <ul>
-      {foreach friend in _.friends}
-        <li>{friend}</li>
-      {/foreach}
-      </ul>
-
-    </body>
-  </html>
+    {foreach friend in _.friends}
+        <span>{friend}</span>
+    {/foreach}
 {/template}
 ```
 
-** Javascript **
+**Javascript**
 
 ```js
 var template_manager = gtpl.create_template_manager();
+
 template_manager.add(template_source);
 
 template_manager.Example.Hello(json);
@@ -67,8 +59,7 @@ https://github.com/GRINPublishing/GTPL/issues
 ## Authors
 
 **Matthias Schmeisser**
-
-+ mailto:mjs@grin.com
+mjs@grin.com
 
 ## License
 
