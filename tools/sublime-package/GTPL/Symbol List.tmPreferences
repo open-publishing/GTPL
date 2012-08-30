@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Symbol List</string>
+	<key>scope</key>
+	<string>source.gtpl tag.gtpl.namespace, source.gtpl support.gtpl.templatename</string>
+	<key>settings</key>
+	<dict>
+		<key>showInSymbolList</key>
+		<integer>1</integer>
+		<key>symbolTransformation</key>
+		<string>
+		s/\{(template|namespace)\s+([a-zA-Z0-9._\-]+)\s*\}/$2/g;
+		</string>
+	</dict>
+	<key>uuid</key>
+	<string>005BE156-8D74-4036-AF38-283708645114</string>
+</dict>
+</plist>

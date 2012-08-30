@@ -1,0 +1,38 @@
+*** GTPL mode for Emacs ***
+
+Copy gtpl-mode.el to your include path and add to your .emacs :
+
+(autoload 'gtpl-mode "gtpl-mode" nil t)
+(setq auto-mode-alist (cons '("\\.gtpl$" . gtpl-mode) auto-mode-alist))
+
+
+
+
+*** Flymake support ***
+
+Flymake is a tool for evaluating your code in an external process instantly after you typed it.
+It marks all warnings and errors found when done. These steps describes how to setup
+flymake for GTPL.
+
+1. Install not totally outdated versions of node.js and tidy (an html-verifyer) 
+
+2. Copy flymakegtpl and verifygtpl.js to an executable path (like /bin ). 
+You may need to make some path adjustments in the scripts by now ;-)
+
+3. Add this to your .emacs:
+(require 'flymake)
+(defun flymake-gtpl-init ()
+  (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                     'flymake-create-temp-inplace))
+         (local-file (file-relative-name
+                      temp-file
+                      (file-name-directory buffer-file-name))))
+    (list "flymakegtpl" (list local-file))))
+
+(add-to-list 'flymake-allowed-file-name-masks
+             '("\\.gtpl\\'" flymake-gtpl-init))
+
+(add-to-list 'flymake-err-line-patterns
+                         '("line \\([0-9]+\\) column \\([0-9]+\\) - \\(Warning\\|Error\\): \\(.*\\)"
+                           nil 1 2 4))
+

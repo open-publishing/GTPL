@@ -1,0 +1,9 @@
+require('./test_copyescape.js');
+require('./test_basic.js');
+require('./test_if.js');
+require('./test_foreach.js');
+require('./test_cycle.js');
+require('./test_literal.js');
+require('./test_call.js');
+require('./test_multitemplate.js');
+require('./test_export.js');

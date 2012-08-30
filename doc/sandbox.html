@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html> <head>
+<title>GRIN Templates Sandbox</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="http://mjs.grin.com/js/gtpl/gtpl.js"></script>
+</head>
+
+<body>
+<h1>GRIN Templates Sandbox</h1>
+<textarea id="template" rows=30 cols=50>
+{namespace Example}
+{template .Hello}
+  <html>
+    <head></head>
+    <body>
+
+      <h3>Hello {_.first_name} {_.last_name}</h3>
+
+      {if _.age < 12}
+       <p>Grow up!</p>
+      {/if}
+
+      <ul>
+      {foreach friend in _.friends}
+        <li>{friend}</li>
+      {/foreach}
+      </ul>
+
+    </body>
+  </html>
+{/template}
+</textarea>
+<textarea id="data" rows=30 cols=30>
+{
+ "first_name":"John",
+ "last_name":"Smith",
+ "age":10,
+ "friends":["Jamie","Ryan","Gordon"]
+}
+</textarea>
+<br/>
+Call Template: <input id="call" value="Example.Hello" style="border-color:#000;"></input>
+<br/>
+<hr/>      
+<div id="result"></div>
+<pre id="error" style="color:red;"></pre>
+<hr/>
+<script type="text/javascript">
+function do_render() {
+$('#result,#error').html('');
+$('#template,#data,#call').css('border-color','#000');
+var tmpl = $('#template').val();
+var data;
+try {
+  data = JSON.parse($('#data').val());
+}
+catch(e) {
+  $('#data').css('border-color','red');
+  $('#error').text('No valid JSON: ' + e);
+  return;
+}
+
+var call = $('#call').val().split('.');
+
+var template_manager = gtpl.create_template_manager({debug_evals : true,
+    debug_undefined_evals : true,
+    debug_calls : true,
+});
+
+try {
+  template_manager.add(tmpl,'textarea');
+}
+catch(e) {
+  $('#template').css('border-color','red');
+  $('#error').text(e.toString());
+  return;
+}
+
+var call_tmpl = template_manager;
+try {
+  $(call).each(function() {
+   call_tmpl = call_tmpl[this];
+  });
+  if(!call_tmpl)  throw Exception();
+}
+catch(e) {
+  $('#call').css('border-color','red');
+  $('#error').text('Template not found');
+  return;
+}
+
+
+var result;
+try{
+ result= call_tmpl(data);
+}
+catch(e) {
+  $('#template').css('border-color','red');
+  $('#error').text(e.toString());
+  return;
+}
+
+$('#result').html(result);
+};
+
+$('#template,#data,#call').bind('keyup blur focus change paste input',do_render);
+do_render();
+
+</script>
+
+</body> </html>

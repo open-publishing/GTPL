@@ -1,0 +1,27 @@
+{
+	"scope": "source.gtpl - meta.gtpl.tag",
+
+	"completions":
+ 	[
+        { "trigger" : "if\tGTPL", "contents" : "{if ${1:condition}}\n\t${2:$SELECTION}\n{/if}" },
+        { "trigger" : "else\tGTPL", "contents" : "{else}" },
+        { "trigger" : "elseif\tGTPL", "contents" : "{elseif ${1:condition}}" },
+        { "trigger" : "foreach\tGTPL", "contents" : "{foreach ${1:iterator} in ${2:list}}\n\t${3:$SELECTION}\n{/foreach}" },
+        { "trigger" : "namespace\tGTPL", "contents" : "{namespace ${1:namespace}}" },
+        { "trigger" : "template\tGTPL", "contents" : "{template ${1:name}}\n\t${2:$SELECTION}\n{/template}" },
+        { "trigger" : "break\tGTPL", "contents" : "{break}" },
+        { "trigger" : "continue\tGTPL", "contents" : "{continue}" },
+        { "trigger" : "call\tGTPL", "contents" : "{call ${1:name}}" },
+        { "trigger" : "Call\tGTPL", "contents" : "{Call ${1:name}}\n\t${2:$SELECTION}\n{/Call}" },
+        { "trigger" : "yield\tGTPL", "contents" : "{yield ${1:name}}" },
+        { "trigger" : "Yield\tGTPL", "contents" : "{Yield ${1:name}}\n\t${2:$SELECTION}\n{/Yield}" },
+        { "trigger" : "param\tGTPL", "contents" : "{param ${1:key}=${2:value}}" },
+        { "trigger" : "container\tGTPL", "contents" : "{container ${1:key}=${2:value}}" },
+        { "trigger" : "meta\tGTPL", "contents" : "{meta ${1:key}=${2:value}}" },
+        { "trigger" : "ifempty\tGTPL", "contents" : "{ifempty}" },
+        { "trigger" : "cycle\tGTPL", "contents" : "{cycle ${1:list}}" },
+        { "trigger" : "ldelim\tGTPL", "contents" : "{ldelim}" },
+        { "trigger" : "rdelim\tGTPL", "contents" : "{rdelim}" },
+        { "trigger" : "literal\tGTPL", "contents" : "{literal}\n\t${2:$SELECTION}\n{/literal}" }
+	]
+}

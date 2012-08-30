@@ -1,0 +1,60 @@
+#!/usr/bin/perl
+my $str = `cat $ARGV[0]`;
+my $new = '';
+my $oldpos = 0;
+
+
+while($str =~ /{(([^{]|{([^{]|{([^{]|{[^{}]*?})*?})*?})*?)}/g) {
+  $mlen = length($&);
+  $mpos = length($`);
+  $new .= substr($str,$oldpos, $mpos-$oldpos);																	   
+  $substr = substr($str,length($`),$mlen);
+  $substr =~ s/\S/ /g;
+  $new .= $substr;																		 
+  $oldpos = $mpos + $mlen;
+}
+
+$new .= substr($str,$oldpos);																	   
+
+
+%selfclosingtags = {"area"=>1, "base"=>1, "basefont"=>1, "br"=>1, "col"=>1, "frame"=>1, "hr"=>1, "img"=>1, "input"=>1, "link"=>1,"meta"=>1, "param"=>1};
+
+while($new =~ /<(div|span)[^>]*\/>/g) {
+  $tag = $1;
+  unless($selfclosingtags[$tag]) {
+	$before = $`;
+	$line = ($before =~ tr/\n//) +1;
+
+	$before =~ /\n([^\n]+)$/;
+	
+	$col = length($1);
+	print "line $line column $col - Error: $tag is not allowed to be self-closing\n";
+  }
+}
+
+
+
+$str =~ s/\\/\\\\/g;
+$str =~ s/"/\\"/g;
+
+
+open(INPUT1, "echo \"$str\" | node ~/bin/verifygtpl.js|") or die $!;
+while(<INPUT1>) {
+  /^TemplateParseError/;
+  print;
+}
+
+
+$new = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head><title></title></head><body>' . $new . '</body></html>';
+
+$new =~ s/\\/\\\\/g;
+$new =~ s/"/\\"/g;
+
+open(INPUT, "echo \"$new\" | tidy -utf8 -q -o /dev/null 2>&1|");
+#open(INPUT, "echo \"$new\" | rxp -s 2>&1|");
+while (<INPUT>){
+    /^Error/ && chomp;
+	unless(/(trimming empty|discarding whitespace|lacks value|proprietary attribute "grin|lacks "action" attribute|escaping malformed URI reference)/) {
+	  print;
+	}
+}
