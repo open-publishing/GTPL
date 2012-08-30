@@ -46,7 +46,10 @@ template_manager.Example.Hello(json);
 
 Why another templating library?
 
-GTPL is easy to learn, to write, to read and to debug.
+* Easy to learn, write, read and debug.
+* Truly separates code from content
+* Good editor support
+* Easy use of helper functions
 
 And it is fast!
 
