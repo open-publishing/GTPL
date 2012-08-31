@@ -1,6 +1,8 @@
 ## GTPL - Grin Template Language
 
-A highlevel javascript template engine
+**A highlevel javascript template engine.**
+
+It has never been so easy to write templates.
 
 ## Basics
 
@@ -44,14 +46,20 @@ template_manager.Example.Hello(json);
 
 ## Why GTPL?
 
-Why another templating library?
+Why this template engine?
 
-* Easy to learn, write, read and debug.
-* Truly separates code from content
+* Easy to learn, write, read and debug
+* True separation of code and content
+* Powerful abstraction and organization mechanisms
 * Good editor support
 * Easy use of helper functions
 
 And it is fast!
+
+## Documentation
+
+A full-grown documentation is coming soon!
+Meanwhile, take a look at CheatSheet.md
 
 ## Issues
 
