@@ -57,13 +57,12 @@ JSON for all demos
 	{_} 		{* Local Root Node  *}
 	{_ctx} 	  	{* Global Root Node *}
 	{_p.foo}	{* Parameter "foo"  *}
-	{link_to(_)} 	{* Registered helper function *} 
-	
-	{* evalNodes contain side-effect free, javascript: *}
-	{_.comments.filter(function(i){return i.free;})}
+	{link_to(_)}    {* Registered helper function *} 
 
-	{* evalNodes should output strings. && and || can be useful: *}
-	{_.comments && _.comments[0].text || ‘no comment’}
+	{_.comments.filter(item('free'))}  {* evalNodes contain side-effect free, javascript: *}
+
+	{_.comments && _.comments[0].text || ‘no comment’} {* "&&" and "||" can be useful: *}
+
 {/template}
 ```
 
@@ -72,16 +71,18 @@ JSON for all demos
 {namespace DemoCall}
 
 {template .Start}
-	{_.title}		{* "Hello World"*}
-	{_ctx.title}	{* "Hello World"*}
+
+	{_.title}       {* "Hello World" *}
+	{_ctx.title}    {* "Hello World" *}
 
 	{call DemoCall.Two root=_.comment[0]}
 
 {/template}
 
 {template .Two}
-	{_.text}		{* "Lorem Ipsum" (New local root) *}
-	{_ctx.title}	{* "Hello World"                  *}
+
+	{_.text}        {* "Lorem Ipsum" (New local root) *}
+	{_ctx.title}    {* "Hello World"                  *}
 {/template}
 
 {template .MoreCallExamples}
@@ -102,18 +103,20 @@ This shows the semanitcs of calls in combination with params.
 
 {template DemoParam2}
 	{param foo=’bar’}
-	{_p.foo}        {* "bar" *}
+	{_p.foo}          {* "bar" *}
 
 	{call Two}
 
-	{_p.foo}        {* "bar" (param not changed here) *}
+	{_p.foo}          {* "bar" (param not changed here) *}
 
 {/template}
 
 {template Two}
+
 	{_p.foo}            {* "bar" !!params are propagated *}
 	{param foo="blub"}
 	{_p.foo}            {* "blub" !!params changed locally*}
+	
 {/template}
 ```
 
