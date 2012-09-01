@@ -59,9 +59,9 @@ JSON for all demos
 	{_p.foo}	{* Parameter "foo"  *}
 	{link_to(_)}    {* Registered helper function *} 
 
-	{_.comments.filter(item('free'))}  {* evalNodes contain side-effect free, javascript: *}
+	{_.comments.filter(item('free'))}  {* evalNodes contain side-effect free, javascript *}
 
-	{_.comments && _.comments[0].text || ‘no comment’} {* "&&" and "||" can be useful: *}
+	{_.comments && _.comments[0].text || ‘no comment’} {* "&&" and "||" can be useful *}
 
 {/template}
 ```
@@ -86,8 +86,8 @@ JSON for all demos
 {/template}
 
 {template .MoreCallExamples}
-	{call .Two root=_.comment[0]}   {* Namespace Rules also apply to calls: *}
-	{call .Three}                   {*Dosn’t change local root. Same as "root=_" *}
+	{call .Two root=_.comment[0]}   {* Namespace Rules also apply to calls *}
+	{call .Three}                   {* Dosn’t change local root. Same as "root=_" *}
 {/template}
 ```
 
@@ -139,7 +139,9 @@ Call (with capital "C") expects a closing statement {/Call}. One can specify  pa
 {template Two}
 	{_p.foo}   {* "bar" *}
 {/template}
-if
+```
+
+## if
 
 {template DemoIf}
 	{if _.title == "yodel"}  {* This is a javascript expression *}
@@ -191,7 +193,7 @@ A special form of "call", uses template containers instead of template names.
 {/template}
 
 {template GenericBox}
-{* This template doesn’t know anything about comments *}
+	{* This template doesn’t know anything about comments *}
 
 	<div class="box">
 
