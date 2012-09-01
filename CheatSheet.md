@@ -142,7 +142,7 @@ Call (with capital "C") expects a closing statement {/Call}. One can specify  pa
 ```
 
 ## if
-
+```
 {template DemoIf}
 	{if _.title == "yodel"}  {* This is a javascript expression *}
 		Hollaruethi
