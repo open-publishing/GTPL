@@ -179,11 +179,11 @@ Call (with capital "C") expects a closing statement {/Call}. One can specify  pa
 ```
 
 ## yield
-```
-A special form of "call", uses template containers instead of template names.
 
+A special form of "call", uses template containers instead of template names.
+```
 {template DemoYield}
-	{foreach comment in _.comments
+	{foreach comment in _.comments}
 
 		{Call GenericBox root=comment}
 			{container GENERICBOXCONTENT = MyComment}  {* set GENERICBOXCONTENT to template "MyComment" *}
@@ -251,8 +251,8 @@ Container (with capital "C") defines an inline template. Some special variables 
 {template DemoYield2}
 	{param foo="bar"}
 
-	{foreach comment in _.comments
-	{Call GenericBox root=comment}
+	{foreach comment in _.comments}
+		{Call GenericBox root=comment}
 			{Container GENERICBOXCONTENT}
 				{comment.text}  {* is still defined here *}
 				{_.name}        {* local root is not changed *}
@@ -260,7 +260,8 @@ Container (with capital "C") defines an inline template. Some special variables 
 				{_p.foo}        {* "bar"  *}
 				{_yp.foo}       {* "blub" *}
 			{/Container}
-	{/Call}
+		{/Call}
+	{/foreach}
 {/template}
 
 {template GenericBox}
@@ -281,6 +282,5 @@ This statement adds meta information to the compiled template, which can be eval
 {template DemoMeta}
 	{meta description="this is an example template for meta"}
 	{meta export_template=false}
-	...
 {/template}
 ```
