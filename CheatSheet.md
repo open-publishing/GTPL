@@ -102,7 +102,7 @@ JSON for all demos
 ## call & params
 
 This shows the semanitcs of calls in combination with params.
-
+```
 {template DemoParam2}
 	{param foo=’bar’}
 	{_p.foo}          {* "bar" *}
