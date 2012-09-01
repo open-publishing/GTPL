@@ -1,5 +1,5 @@
 var assert= assert || require('assert');
-var gtpl= gtpl || require('../gtpl');
+var gtpl= gtpl || require('../lib/gtpl');
 var test_suite = test_suite || require('./test_suite.js');
 
 var deepCopy = gtpl.deepCopy;

@@ -4,8 +4,8 @@ try{
     require; //test if commonjs is supported (assume: server-side)
     print_result = print_result_stdout;
     print_heading = print_heading_stdout;
-    assert=require('../../Grin/Utils/assert.js');
-    gtpl=require('../gtpl.js');
+    assert=require('./assert.js');
+    gtpl=require('../lib/gtpl.js');
 } catch(e) {
     //no commonjs implementation, we assume a browser
     require = function(path) {
