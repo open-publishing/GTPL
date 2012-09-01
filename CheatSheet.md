@@ -97,7 +97,9 @@ JSON for all demos
 	{param foo="bar"}                {* _p.foo == "bar" *}
 	{param name=_.name || "noname"}	 {* RHS is javascript *}
 {/template}
-call & params
+```
+
+## call & params
 
 This shows the semanitcs of calls in combination with params.
 
