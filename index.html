@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Gtpl : Grin Template Language" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Gtpl</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/GRINPublishing/GTPL">View on GitHub</a>
+
+          <h1 id="project_title">Gtpl</h1>
+          <h2 id="project_tagline">Grin Template Language</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/GRINPublishing/GTPL/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/GRINPublishing/GTPL/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>GTPL - Grin Template Language</h2>
+
+<p><strong>A highlevel javascript template engine.</strong></p>
+
+<p>It has never been so easy to write templates.</p>
+
+<h2>Basics</h2>
+
+<p><strong>JSON</strong></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="s2">"first_name"</span><span class="o">:</span><span class="s2">"John"</span><span class="p">,</span>
+ <span class="s2">"last_name"</span><span class="o">:</span><span class="s2">"Smith"</span><span class="p">,</span>
+ <span class="s2">"age"</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span>
+ <span class="s2">"friends"</span><span class="o">:</span><span class="p">[</span><span class="s2">"Jamie"</span><span class="p">,</span><span class="s2">"Ryan"</span><span class="p">,</span><span class="s2">"Gordon"</span><span class="p">]</span>
+<span class="p">};</span>
+</pre></div>
+
+<p><strong>Template</strong></p>
+
+<pre><code>{namespace Example}
+
+{template .Hello}
+    &lt;h3&gt;Hello {_.first_name} {_.last_name}&lt;/h3&gt;
+
+    {if _.age &lt; 12}
+        &lt;p&gt;Grow up!&lt;/p&gt;
+    {/if}
+
+    {foreach friend in _.friends}
+        &lt;span&gt;{friend}&lt;/span&gt;
+    {/foreach}
+{/template}
+</code></pre>
+
+<p><strong>Javascript</strong></p>
+
+<div class="highlight"><pre><span class="kd">var</span> <span class="nx">template_manager</span> <span class="o">=</span> <span class="nx">gtpl</span><span class="p">.</span><span class="nx">create_template_manager</span><span class="p">();</span>
+
+<span class="nx">template_manager</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">template_source</span><span class="p">);</span>
+
+<span class="nx">template_manager</span><span class="p">.</span><span class="nx">Example</span><span class="p">.</span><span class="nx">Hello</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+</pre></div>
+
+<h2>Why GTPL?</h2>
+
+<p>Why this template engine?</p>
+
+<ul>
+<li>Easy to learn, write, read and debug</li>
+<li>True separation of code and content</li>
+<li>Powerful abstraction and organization mechanisms</li>
+<li>Good editor support</li>
+<li>Easy use of helper functions</li>
+</ul><p>And it is fast!</p>
+
+<h2>Documentation</h2>
+
+<p>A full-grown documentation is coming soon!
+Meanwhile, take a look at CheatSheet.md</p>
+
+<h2>Issues</h2>
+
+<p>Have a bug? Please create an issue here on GitHub!</p>
+
+<p><a href="https://github.com/GRINPublishing/GTPL/issues">https://github.com/GRINPublishing/GTPL/issues</a></p>
+
+<h2>Authors</h2>
+
+<p><strong>Matthias Schmeisser</strong>
+<a href="mailto:mjs@grin.com">mjs@grin.com</a></p>
+
+<h2>License</h2>
+
+<p>Copyright 2012 Grin Verlag GmbH.</p>
+
+<p>Licensed under the GNU GENERAL PUBLIC LICENSE, Version 3 <a href="http://www.gnu.org/licenses/gpl-3.0">http://www.gnu.org/licenses/gpl-3.0</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Gtpl maintained by <a href="https://github.com/GRINPublishing">GRINPublishing</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
