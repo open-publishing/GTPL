@@ -7,3 +7,5 @@ require('./test_literal.js');
 require('./test_call.js');
 require('./test_multitemplate.js');
 require('./test_export.js');
+require('./test_meta.js');
+require('./test_introspection.js');
