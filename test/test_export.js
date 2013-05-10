@@ -153,3 +153,21 @@ s_test('export meta',function() {
 
     assert.strictEqual( tm2.A.B.__meta__.M1 , 'abc');
 });
+
+s_test('export introspection',function() {
+    var tm1 = gtpl.create_template_manager();
+    var tm2 = gtpl.create_template_manager();
+
+    tm1.add('{namespace A}{template .B}{/template}');
+
+    assert.strictEqual( tm1.A.B.__self__.name , 'A.B');
+    assert.strictEqual( tm1.A.B.__self__.namespace , 'A');
+    var s;
+
+    assert.doesNotThrow( function() {s = tm1.export_templates();});
+    assert.doesNotThrow( function() {tm2.import_templates(s);});
+
+    assert.strictEqual( tm2.A.B.__self__.name , 'A.B');
+    assert.strictEqual( tm2.A.B.__self__.namespace , 'A');
+});
+
