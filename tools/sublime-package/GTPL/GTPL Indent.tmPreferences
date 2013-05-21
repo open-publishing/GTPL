@@ -10,12 +10,23 @@
 	<dict>
 		<key>decreaseIndentPattern</key>
 		<string>(?x)
-			(^\s*&lt;/[^&gt;]+&gt;|--&gt;|--%&gt;)
-			|(^\s*\{(/|else|elseif|ifempty))</string>
+			^\s*
+			(&lt;/(?!html)
+			[A-Za-z0-9]+\b[^&gt;]*&gt;
+			|--&gt;
+			|\}
+			)
+			|^\s*\{(/|else|elseif|ifempty)
+		</string>
 		<key>increaseIndentPattern</key>
 		<string>(?x)
-			^\s*&lt;(([^!/?]|%)(?!.+?([/%]&gt;|&lt;/.+?&gt;))|[%!]--\s*$)
-			|^\s*\{(template|if|foreach|literal|Call|Yield|else|elseif|ifempty)\b(([^{]|\{([^{]|\{([^{]|\{[^{}]*?\})*?\})*?\})*?)?\}\s*$</string>
+			^\s*
+			&lt;(?!\?|area|base|br|col|frame|hr|html|img|input|link|meta|param|[^&gt;]*/&gt;)
+			([A-Za-z0-9]+)(?=\s|&gt;)\b[^&gt;]*&gt;(?!.*&lt;/\1&gt;)
+			|&lt;!--(?!.*--&gt;)
+			|^\s*\{(template|if|foreach|literal|Call|Yield|else|elseif|ifempty)\b(([^{]|\{([^{]|\{([^{]|\{[^{}]*?\})*?\})*?\})*?)?\}\s*$
+			|\{[^}"']*$
+		</string>
 		<key>unIndentedLinePattern</key>
 		<string>^\s*((\{\*|\*\}\s*$).*)?$</string>
 	</dict>
@@ -23,4 +34,3 @@
 	<string>BC062860-3346-4D3B-8421-C5543F83D11G</string>
 </dict>
 </plist>
-
