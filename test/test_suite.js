@@ -164,4 +164,5 @@ exports.e_throw=e_throw;
 exports.s_test=s_test;
 exports.t_test=t_test;
 exports.t_throw=t_throw;
+exports.m_test=m_test;
 exports.run=run;
