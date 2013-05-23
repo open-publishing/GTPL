@@ -23,6 +23,7 @@
 			^\s*
 			&lt;(?!\?|area|base|br|col|frame|hr|html|img|input|link|meta|param|[^&gt;]*/&gt;)
 			([A-Za-z0-9]+)(?=\s|&gt;)\b[^&gt;]*&gt;(?!.*&lt;/\1&gt;)
+			|^[^&gt;&lt;]*&gt;(?!.*&lt;/[^&gt;]*&gt;)
 			|&lt;!--(?!.*--&gt;)
 			|^\s*\{(template|if|foreach|literal|Call|Yield|else|elseif|ifempty)\b(([^{]|\{([^{]|\{([^{]|\{[^{}]*?\})*?\})*?\})*?)?\}\s*$
 			|\{[^}"']*$
