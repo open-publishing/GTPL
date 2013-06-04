@@ -26,6 +26,11 @@ json = {n:[1,2,3]};
 html = '1,2,3x11,2,321,2,331,2,3x1,2,3';
 e_test('{foreach n in _.n}',templ,json,html);
 
+templ = '{n}x{foreach n in n}{n}{_.n}{m}{/foreach}x{n}';
+json = {n:[1,2,3],m:'y'};
+html = '1,2,3x11,2,3y21,2,3y31,2,3yx1,2,3';
+e_test('{foreach n in n} / provided keys',templ,json,html,{provide_root_keys:true});
+
 templ = '{foreach $n in _.n}{$n}X{ifempty}Y{/foreach}';
 json = {n:[]};
 html = 'Y';

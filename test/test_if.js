@@ -143,6 +143,11 @@ json = {a:false};
 html = '123';
 e_test('{if _.a || 1} false',templ,json,html);
 
+templ = '1{if !!a}2{/if}{if !a}x{/if}3';
+json = {a:true};
+html = '123';
+e_test('provided root keys',templ,json,html, {provide_root_keys:true});
+
 templ = '1{if\n \t  _ . a   \t\n}2{/if  \n }3';
 json = {a:1};
 html = '123';

@@ -179,6 +179,11 @@ json = 'abc';
 html = 'abc';
 e_test('Basic Global Context',templ,json,html);
 
+templ = '{a}{_.a}{b.c}{_.b.c}';
+json = {a:"xx",b:{c:"yy"}};
+html = 'xxxxyyyy';
+e_test('Provide Root Key',templ,json,html, {provide_root_keys:true});
+
 templ = '{$}';
 json = 'abc';
 html = 'abc';
@@ -278,6 +283,11 @@ templ = '{undefined}';
 json = {a:1};
 e_throw('Undefined Error 2',templ,json,gtpl.TemplateUnexpectedUndefinedError,{debug_evals:true, debug_undefined_evals:true});
 
+templ = '{a}{_.a}{b.c}{_.b.c}';
+json = {a:"xx",b:{c:"yy"}};
+html = 'xxxxyyyy';
+e_throw('Disabled Provide Root Keys',templ,json,gtpl.TemplateEvaluationError, {provide_root_keys:false});
+
 s_test('Embedded Error 1',function() {
     templ = '{template t}AAA {undefined} BBB{/template}';
     json = {a:1};
@@ -289,7 +299,7 @@ s_test('Embedded Error 1',function() {
 });
 
 s_test('Embedded Error 2',function() {
-    templ = '{template t}AAA {a} BBB{/template}';
+    templ = '{template t}AAA {b} BBB{/template}';
     json = {a:1};
     html = 'AAA TemplateEvaluationError: ';
     var result;

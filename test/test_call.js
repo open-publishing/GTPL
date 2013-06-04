@@ -71,6 +71,12 @@ json = {a:{b:1},b:2};
 html = '122';
 t_test('Global Root', t_wrap({T1:t1,T2:t2}),'T1',json,html);
 
+t1 = '{call T2 root=a}{_ctx.b}';
+t2 = '{b}{_ctx.b}';
+json = {a:{b:1},b:2};
+html = '122';
+t_test('Provided Root Keys', t_wrap({T1:t1,T2:t2}),'T1',json,html,{provide_root_keys:true});
+
 t1 = 'a{call T2 root=\'abc\'}{call T2 root=123}b';
 t2 = '{_}';
 json = null;
@@ -483,6 +489,13 @@ t3 = 't';
 json = null;
 html = 'aycyxytya';
 t_test('inline container 12', t_wrap({T1:t1,T2:t2,T3:t3}),'T1',json,html, {keep_params:true});
+
+t1 = 'a{Call T2}{Container TT}c{a}c{/Container}{/Call}x{Call T2}{/Call}a';
+t2 = '{_.a}{yield TT fallback=T3}{a}';
+t3 = 't';
+json = {a:1};
+html = 'a1c1c1x1t1a';
+t_test('inline container w/ provided keys', t_wrap({T1:t1,T2:t2,T3:t3}),'T1',json,html, {keep_params:true,provide_root_keys:true});
 
 t1 = 'a{param a=0}{Call T2}{param a=1}{Container TT}c {_p.a}{_yp.a} c{/Container}{/Call} {_p.a}a';
 t2 = 'y{Yield TT}{param a=3}{/Yield} {_p.a}y';
