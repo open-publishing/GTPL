@@ -297,3 +297,63 @@ s_test('Embedded Error 2',function() {
     assert.equal(result.substring(0,29), html);
     return result;
 });
+
+
+s_test('Error Code Display 1', function() {
+    templ = '{template t}line1\nline2\nline3\nline4\nline5\nline6\nerror in this line7{template}\nline8\nline9\nline10\nline11\nline12\nline13\nline14\n{/template}';
+    json = null;
+    var expected = "  2:\tline2\n  3:\tline3\n  4:\tline4\n  5:\tline5\n  6:\tline6\n> 7:\terror in this line7{template}\n  8:\tline8\n  9:\tline9\n  10:\tline10\n  11:\tline11\n  12:\tline12\n";
+    var result;
+    try {
+        run({T1:templ}, 't', json, true);
+    }
+    catch(e) {
+        result = e.code_to_string();
+    }
+    assert.equal(result, expected);
+});
+
+s_test('Error Code Display 2', function() {
+    templ = '{template t}line1\nline2\nerror in this line3{template}\nline4\nline5\nline6{/template}';
+    json = null;
+    var expected = "  1:\t{template t}line1\n  2:\tline2\n> 3:\terror in this line3{template}\n  4:\tline4\n  5:\tline5\n  6:\tline6{/template}\n";
+    var result;
+    try {
+        run({T1:templ}, 't', json, true);
+    }
+    catch(e) {
+        result = e.code_to_string();
+    }
+    assert.equal(result, expected);
+});
+
+s_test('Error Code Display 3', function() {
+    //Builder Error
+    templ = '{template bla}\n{/if}\n';
+    json = null;
+    var expected = "  1:\t{template bla}\n> 2:\t{/if}\n";
+    var result;
+    try {
+        run({T1:templ}, 't', json, true);
+    }
+    catch(e) {
+        result = e.code_to_string();
+    }
+    assert.equal(result, expected);
+});
+
+s_test('Error Code Display 4', function() {
+    //Eval Error
+    templ = '{*line1\nline2\nline3\nline4\nline5\nline6\nline7*}\n{template t}line8\nline9{a.b}\nline10{/template}\n{*line11\nline12\nline13\nline14\nline15*}\n';
+    json = null;
+    var expected = "  4:\tline4\n  5:\tline5\n  6:\tline6\n  7:\tline7*}\n  8:\t{template t}line8\n> 9:\tline9{a.b}\n  10:\tline10{/template}\n  11:\t{*line11\n  12:\tline12\n  13:\tline13\n  14:\tline14\n";
+    var result;
+    try {
+        run({T1:templ}, 't', json, true,{debug_evals:true,introspection_mode:'code_debug'});
+    }
+    catch(e) {
+        result = e.code_to_string();
+    }
+    assert.equal(result, expected);
+});
+
