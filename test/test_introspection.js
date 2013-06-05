@@ -52,5 +52,8 @@ m_test('full introspection 2', {T1:t1}, function(tm) {
 	assert.equal(tm.N1.T1.__self__.source, 'T1');
 	assert.equal(tm.N1.T1.__self__.pos_start, 15);
 	assert.equal(tm.N1.T1.__self__.pos_end, 45);
-	assert.equal(keys(tm.N1.T1.__self__).length, 5);
+	assert.equal(tm.N1.T1.__self__.line_start, 1);
+	assert.equal(tm.N1.T1.__self__.line_end, 1);
+	assert.equal(tm.N1.T1.__self__.code, t1);
+	assert.equal(keys(tm.N1.T1.__self__).length, 8);
 }, {introspection_mode:'full'});

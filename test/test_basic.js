@@ -359,7 +359,7 @@ s_test('Error Code Display 4', function() {
     var expected = "  4:\tline4\n  5:\tline5\n  6:\tline6\n  7:\tline7*}\n  8:\t{template t}line8\n> 9:\tline9{a.b}\n  10:\tline10{/template}\n  11:\t{*line11\n  12:\tline12\n  13:\tline13\n  14:\tline14\n";
     var result;
     try {
-        run({T1:templ}, 't', json, true,{debug_evals:true,introspection_mode:'code_debug'});
+        run({T1:templ}, 't', json, true,{debug_evals:true,introspection_mode:'full'});
     }
     catch(e) {
         result = e.code_to_string();
