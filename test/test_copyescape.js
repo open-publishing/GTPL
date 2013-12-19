@@ -108,3 +108,12 @@ s_test('HTML Escaping',function() {
     assert.equal ( deepCopy(os1.b[0],esc), s2 );
     assert.equal ( os1.a, s1 );
 });
+
+//HTML Escaping
+s_test('Ignore Patterns',function() {
+    var s1= {a:{__b:5}, __c:3};
+
+    assert.equal ( keys(deepCopy(s1))[0], 'a' );
+    assert.equal ( keys(deepCopy(s1).a).length, 0 );
+    assert.equal ( keys(deepCopy(s1,null,'a'))[0], '__c' );
+});
