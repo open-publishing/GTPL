@@ -61,17 +61,6 @@ s_test('Object copy',function() {
         assert.equal ( a3.length , 3 );
 });
 
-//Type consistency
-s_test('type consistency',function() {
-    function T() { this.n = 123;}
-    T.prototype = new Object();
-    T.prototype.constructor = T;
-
-    // fails: assert.ok ( deepCopy(new T()) instanceof T );
-    assert.ok ( deepCopy(new T()).constructor === T );
-});
-
-
 // Recursion avoidance
 s_test('recursion avoidance',function() {
     var r1 = {a:3};
@@ -116,4 +105,22 @@ s_test('Ignore Patterns',function() {
     assert.equal ( keys(deepCopy(s1))[0], 'a' );
     assert.equal ( keys(deepCopy(s1).a).length, 0 );
     assert.equal ( keys(deepCopy(s1,null,'a'))[0], '__c' );
+});
+
+//Prototype tests
+s_test('Prototype tests',function() {
+    var proto = {'d': 'test'};
+    var s1 = {};
+
+    if(!Object.setPrototypeOf) {
+        // <IE11 does not support __proto__ nor setPrototypeOf.
+        s1 = Object.create(Object.getPrototypeOf(proto));
+    }
+    else {
+        Object.setPrototypeOf(s1, proto);
+    }
+
+    assert.equal ( deepCopy(s1, null, null, false)['d'], 'test');
+    assert.equal ( deepCopy(s1, null, null, true)['d'], undefined);
+    assert.equal ( deepCopy(s1)['d'], 'test');
 });
